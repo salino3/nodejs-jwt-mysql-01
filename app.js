@@ -1,9 +1,18 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const { db } = require("./db");
 
 const app = express();
 
 dotenv.config();
+
+db.connect((err) => {
+  if (err) {
+    console.log("Error: ", err);
+  } else {
+    console.log("MySQL connection established!");
+  }
+});
 
 app.use(express.json());
 
