@@ -19,15 +19,17 @@ const publicDirectory = path.join(__dirname, "./public");
 
 app.use(express.static(publicDirectory));
 
-app.set("view engine", "hbs");
-
+// Parse URL-encoded bodies (as sent by HMTL forms)
+app.use(express.urlencoded({ extended: false }));
+// Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  //   res.send("<h1>Home page</h1>");
+app.set("view engine", "hbs");
 
-  res.render("index");
-});
+// Define Routes
+app.use("/users", require("./routes/pages"));
+
+app.use("/auth", require("./routes/auth"));
 
 app.listen(process.env.PORT || 5100, () => {
   console.log(`Server is running on port ${process.env.PORT}`);
