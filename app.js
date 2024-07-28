@@ -28,7 +28,6 @@ app.set("view engine", "hbs");
 
 // Define Routes
 app.use("/users", require("./routes/pages"));
-
 app.use("/auth", require("./routes/auth"));
 
 app.listen(process.env.PORT || 5100, () => {
